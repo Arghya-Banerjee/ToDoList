@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Create Task";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Create New Task</h2>
+    <div class="card">
+        <div class="card-body">
+            <form asp-action="Create" method="post">
+                <div class="mb-3">
+                    <label for="Title" class="form-label">Task Title</label>
+                    <input type="text" class="form-control" id="taskTitle" name="Title" required />
+                </div>
+                <div class="mb-3">
+                    <label for="TDescription" class="form-label">Task Description</label>
+                    <textarea class="form-control" id="taskDescription" name="TDescription" rows="3"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="TPriority" class="form-label">Priority</label>
+                    <select class="form-select" id="taskPriority" name="TPriority">
+                        <option value="2">High</option>
+                        <option value="1">Medium</option>
+                        <option value="0">Low</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="TStatus" class="form-label">Status</label>
+                    <select class="form-select" id="taskStatus" name="TStatus">
+                        <option value="Pending">Pending</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                </div>
+                <button asp-controller="Home" asp-action="AddTask" type="submit" class="btn btn-primary w-100">Save Task</button>
+            </form>
+        </div>
+    </div>
+</div>

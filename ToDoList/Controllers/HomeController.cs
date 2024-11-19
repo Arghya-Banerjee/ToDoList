@@ -1,3 +1,4 @@
+using Core;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using ToDoList.Models;
@@ -15,12 +16,25 @@ namespace ToDoList.Controllers
 
         public IActionResult Index()
         {
+            TaskModel obj = new TaskModel();
+            obj.Opmode = 0;
+            List<TaskModel> tasklist = new List<TaskModel>();
+            tasklist = DBOperations<TaskModel>.GetAllOrByRange(obj, Constant.usp_taskMaster);
+            return View(tasklist);
+        }
+
+        public IActionResult AddTaskPage()
+        {
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult AddTask(TaskModel obj)
         {
-            return View();
+            obj.Opmode = 1;
+            int res = 0;
+            res = DBOperations<TaskModel>.DMLOperation(obj, Constant.usp_taskMaster);
+
+            return RedirectToAction("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
